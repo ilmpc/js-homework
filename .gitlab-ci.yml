@@ -1,0 +1,18 @@
+stages:
+  - test
+
+test:
+  stage: test
+  script: npm i && npm test
+  environment: test
+  only:
+    - 01-basic
+    - 02-functions
+    - 04-oop
+    - 05-dom-events
+  tags:
+    - node
+    - nodejs
+
+variables:
+  GIT_SSL_NO_VERIFY: "true"
