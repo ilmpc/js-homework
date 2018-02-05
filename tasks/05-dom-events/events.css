@@ -1,0 +1,30 @@
+ul.messages {
+    list-style: none;
+}
+
+li {
+    position: relative;
+    background: #eee;
+    padding: 20px;
+    border-top: solid 3px #777;
+    width: 500px;
+}
+
+.remove-button {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 10px;
+    right: 10px;
+    padding: 0;
+    font-size: 120%;
+    text-align: center;
+    color: red;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
