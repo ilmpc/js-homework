@@ -12,7 +12,6 @@ test:
     - 05-dom-events
   tags:
     - node
-    - nodejs
 
 variables:
   GIT_SSL_NO_VERIFY: "true"
