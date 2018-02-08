@@ -1,6 +1,8 @@
 const functions = require('../../tasks/02-functions');
 
 describe('functional', () => {
+  
+  jest.useFakeTimers();
 
   it('#1 add 2 numbers as sum(a)(b)', () => {
     console.log(functions.sum);
