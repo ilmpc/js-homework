@@ -70,7 +70,7 @@ exports.strFromObjValues = function(obj){
 
 /**
  * Задача #7
- * Написать функцию которая сортирует массив по убыванию
+ * Написать функцию которая сортирует массив чисел по убыванию
  */
 
 exports.arrSortDesc = function (arr) {
