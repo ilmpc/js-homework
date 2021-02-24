@@ -1,141 +1,101 @@
-const functions = require('../../tasks/02-functions');
+import { sequence, bind, sum, createStorage } from '../../tasks/02-functions';
 
-describe('functional', () => {
-  
-  jest.useFakeTimers();
+describe('function sequence', () => {
+  it('should return function generator', () => {
+    const generator = sequence();
+    const generator1 = sequence(7, 1);
+    const generator2 = sequence(4);
 
-  it('#1 add 2 numbers as sum(a)(b)', () => {
-    console.log(functions.sum);
-    let func = functions.sum;
+    expect(generator).toEqual(expect.any(Function));
+    expect(generator1).toEqual(expect.any(Function));
+    expect(generator2).toEqual(expect.any(Function));
 
-    expect(typeof func(1)(1)).toBe('number');
-    expect(func(1)(2)).toEqual(3);
-    expect(func(5)(-1)).toEqual(4);
 
+    expect(generator()).toBe(1);
+    expect(generator1()).toBe(8);
+    expect(generator2()).toBe(5);
+
+    expect(generator()).toBe(2);
+    expect(generator1()).toBe(9);
+    expect(generator2()).toBe(6);
+
+
+    expect(generator()).toBe(3);
+    expect(generator1()).toBe(10);
+    expect(generator2()).toBe(7);
   });
 
-  it('#2 function invocation counter', () => {
-    let func = functions.counter;
-    let counter = func();
-    counter();
-    counter();
-    counter();
-    expect(counter()).toEqual(4);
-    counter();
-    counter();
-    expect(counter()).toEqual(7);
+  it('should work with not a number', () => {
+    const generator = sequence(null);
+    expect(generator).toEqual(expect.any(Function));
 
-    expect(typeof counter()).toBe('number');
-
+    expect(generator()).toBe(1);
+    expect(generator()).toBe(2);
+    expect(generator()).toBe(3);
   });
+});
 
-  it('#3 print numbers from 1 to 20 in console using setInterval each in 100 ms', () => {
-
-    let func = functions.printNumbersInterval;
-
-    let outputData = '';
-    let storeLog = inputs => (outputData += inputs);
-    console["log"] = jest.fn(storeLog);
-
-    func();
-
-    expect(setInterval).toHaveBeenCalledTimes(1);
-
-    expect(setInterval).toHaveBeenLastCalledWith(expect.any(Function), 100);
-
-    jest.runOnlyPendingTimers();
-
-    expect(outputData).toBe('1');
-
-    jest.runOnlyPendingTimers();
-
-    expect(outputData).toBe('12');
-
-    jest.runOnlyPendingTimers();
-
-    expect(outputData).toBe('123');
-
-    jest.runAllTimers();
-
-    expect(outputData).toBe('1234567891011121314151617181920');
-
-  });
-
-  it('#4 print numbers from 1 to 20 in console using setTimeout each in 100 ms', () => {
-
-    let func = functions.printNumbersTimeout;
-
-    func();
-
-    let outputData = '';
-    let storeLog = inputs => (outputData += inputs);
-    console["log"] = jest.fn(storeLog);
-
-    expect(setTimeout).toHaveBeenCalledTimes(1);
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 100);
-
-    jest.runOnlyPendingTimers();
-
-    expect(outputData).toBe('1');
-
-    jest.runOnlyPendingTimers();
-
-    expect(outputData).toBe('12');
-
-    jest.runOnlyPendingTimers();
-
-    expect(outputData).toBe('123');
-
-    jest.runAllTimers();
-
-    expect(outputData).toBe('1234567891011121314151617181920');
-
-    expect(setTimeout).toHaveBeenCalledTimes(20);
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 100);
-  });
-
-
-  it('#5 log function arguments into console', () => {
-    function sum(a, b) {
-      return a + b;
+describe('function bind', () => {
+  it('should set context and sum params', () => {
+    function returnContext() {
+      return this;
     }
+    const fakeBind = bind(returnContext, 12);
+    expect(fakeBind()).toEqual(12);
 
-    function subtraction(a, b) {
-      return a - b;
+    const fakeBind1 = bind(returnContext, null);
+    expect(fakeBind1()).toEqual(null);
+
+    const fakeBind2 = bind(returnContext);
+    expect(fakeBind2()).toBeUndefined();
+  });
+});
+
+describe('function sum', () => {
+  it('should return undefined on this.sum', () => {
+    try {
+      const result = sum(2, 3);
+    } catch (e) {
+      expect(e).toBeDefined();
     }
-
-    let logger = functions.logger;
-
-    sum = logger(sum);
-
-    subtraction = logger(subtraction);
-
-    let outputData = '';
-    let storeLog = inputs => (outputData += inputs);
-    console["log"] = jest.fn(storeLog);
-
-    sum(2, 3);
-
-    expect(outputData).toBe('2,3');
-
-    outputData = '';
-
-    sum(3, 1);
-
-    expect(outputData).toBe('3,1');
-
-    outputData = '';
-
-    subtraction(4, 2);
-
-    expect(outputData).toBe('4,2');
-
-    outputData = '';
-
-    subtraction(11, 12);
-
-    expect(outputData).toBe('11,12');
-
   });
 
+  it('should return valide result', () => {
+    const fakeSum = sum.bind({sum: 0}, 2, 3);
+
+    expect(fakeSum()).toEqual(5);
+    expect(fakeSum(3, 4)).toEqual(12);
+
+    const fakeSum1 = sum.bind({sum: 10});
+
+    expect(fakeSum1()).toEqual(10);
+    expect(fakeSum1(null)).toEqual(10);
+  });
+});
+
+describe('function storage', () => {
+  it('should set value to array and return array of string', () => {
+    const storage = createStorage();
+    expect(storage).toEqual(expect.any(Function));
+
+    expect(storage()).toEqual(expect.any(Array));
+    expect(storage()).toEqual([]);
+
+    storage('Hello');
+    storage('Hey');
+
+    expect(storage()).toEqual(['Hello', 'Hey']);
+
+    const storage1 = createStorage();
+    storage1(1);
+    storage1(2);
+
+    expect(storage1()).toEqual(['1', '2']);
+
+    const storage2 = createStorage();
+    storage2(null);
+    storage2(2);
+
+    expect(storage2()).toEqual(['null', '2']);
+  });
 });
