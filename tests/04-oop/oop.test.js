@@ -72,21 +72,17 @@ describe('OOP', () => {
     expect(shouldBeCalled).not.toHaveBeenCalledTimes(3);
   });
 
-  it('#3 three classes: AbstractAccumulator, WrongAccumulator, Accumulator (with default value)', () => {
-    const accumulator = new oop.Accumulator();
+  it('#3 Cuboid class', () => {
+    const cuboid = new oop.Cuboid(13, 22, 66);
 
-    accumulator.read(12);
-
-    expect(accumulator.value).toEqual(12);
-    expect(() => new oop.WrongAccumulator()).toThrow();
-    expect(() => new oop.AbstractAccumulator()).toThrow();
+    expect(cuboid.surfaceArea).toEqual(5192);
+    expect(cuboid.volume).toEqual(18876);
   });
 
-  it('#3 three classes: AbstractAccumulator, WrongAccumulator, Accumulator (with custom value)', () => {
-    const accumulator = new oop.Accumulator(5);
+  it('#3 Cube class', () => {
+    const cube = new oop.Cube(13);
 
-    accumulator.read(12);
-
-    expect(accumulator.value).toEqual(17);
+    expect(cube.surfaceArea).toEqual(1014);
+    expect(cube.volume).toEqual(2197);
   });
 });

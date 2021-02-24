@@ -1,7 +1,7 @@
 /**
  * Задача #1
  *
- * Реализовать класс Animal конструктор которого будет принимать параметр name и добавлять его к экземпляру класса.
+ * Реализовать класс Animal, конструктор которого будет принимать параметр name и добавлять его к экземпляру класса.
  * Далее, реализовать два класса: Cat, Dog. Они должны быть унаследованы от класса Animal.
  * В эти классы необходимо добавить геттер phrase, который будет возвращать для класса
  * Cat - 'meow', а для класса Dog - 'wow'.
@@ -55,39 +55,41 @@ exports.Clock = Clock;
 /**
  * Задача #3
  *
- * Создать абстрактный класс AbstractAccumulator, при создании экземпляра которого должен выкидываться Error.
- * Также, он должен проверять что метод read в классе наследнике переопределен.
- * На вход в конструктор должен принимать value (со значением по умолчанию - 0).
- * Далее в нем создать метод read, который при вызове должен выкидывать Error.
- * Создать два новых класса WrongAccumulator и Accumulator и унаследовать их от AbstractAccumulator.
- * В WrongAccumulator мы ничего не переопределяем, просто наследуемся.
- * В Accumulator необходимо переопределить метод read,
- * которому на вход поступает value и его необходимо прибавить к this.value.
+ * Объявите класс Cuboid, который должен получать три аргумента: длина, ширина, высота.
+ * Класс должен иметь геттер surfaceArea(), который возвращает поверхность всего параллелепипеда и геттер volume(),
+ * который подсчитывает его объем. Класс Cube является подклассом класса Cuboid.
+ * Функция конструктора Cube должна принимать только один аргумент - длину
+ * и использовать это значение для установки длины, ширины и высоты.
+ * Подсчитайте объем и поверхность любого куба.
  *
- * new AbstractAccumulator(); // Error
- * new WrongAccumulator(); // Error
+ * const cuboid = new Cuboid(1, 2, 3);
  *
- * const accumulator = new Accumulator();
+ * console.log(cuboid.surfaceArea); // 22
+ * console.log(cuboid.volume); // 6
  *
- * accumulator.read(12);
- * accumulator.read(1);
- * accumulator.read(5);
+ * const cube = new Cube(2);
  *
- * console.log(accumulator.value); // 18
+ * console.log(cube.surfaceArea); // 24
+ * console.log(cube.volume); // 8
  */
 
-class AbstractAccumulator {
+class Cuboid {
+  constructor() {
+    /** Ваш код */
+  }
+
+  get surfaceArea() {
+    /** Ваш код */
+  }
+
+  get volume() {
+    /** Ваш код */
+  }
+}
+
+class Cube extends Cuboid {
   /** Ваш код */
 }
 
-class WrongAccumulator {
-  /** Ваш код */
-}
-
-class Accumulator {
-  /** Ваш код */
-}
-
-exports.AbstractAccumulator = AbstractAccumulator;
-exports.WrongAccumulator = WrongAccumulator;
-exports.Accumulator = Accumulator;
+exports.Cuboid = Cuboid;
+exports.Cube = Cube;
