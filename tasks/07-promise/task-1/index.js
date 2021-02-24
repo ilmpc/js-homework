@@ -2,6 +2,7 @@
  * Задача #1
  *
  * Сверстать форму с полем для ввода и тремя кнопками.
+ *
  * Каждая кнопка должна отправлять запрос одним из способов:
  * 1) через обертку Promise над XHR (https://codesandbox.io/s/l47zmkw84z);
  * 2) через fetch (https://developer.mozilla.org/ru/docs/Web/API/Fetch_API);
