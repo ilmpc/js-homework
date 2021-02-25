@@ -6,10 +6,10 @@ test:
   script: npm i && npm test
   environment: test
   only:
-    - 01-basic
-    - 02-functions
-    - 04-oop
-    - 05-dom-events
+    - 01-basic-implementation
+    - 02-functions-implementation
+    - 04-oop-implementation
+    - 05-dom-events-implementation
   tags:
     - node
 
