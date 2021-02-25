@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.school.noveogroup.com:internship2018/homework.git"
+    "url": "git@gitlab.school.noveogroup.com:internship/homework.git"
   },
   "author": "",
   "devDependencies": {
