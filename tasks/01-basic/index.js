@@ -3,11 +3,10 @@
  * Добавить вложенное свойство 'c', содержащее строковое значение
  */
 
-const obj = {};
-/** Ваш код */
+const obj = {}
+obj.c = 'Hi!'
 
-exports.obj = obj;
-
+exports.obj = obj
 
 /**
  * Задача #2
@@ -18,11 +17,11 @@ const objWithNestedKey = {
   key: {
     nestedKey: 'someValue'
   }
-};
+}
 
-/** Ваш код */
+delete objWithNestedKey.key.nestedKey
 
-exports.objWithNestedKey = objWithNestedKey;
+exports.objWithNestedKey = objWithNestedKey
 
 /**
  * Задача #3
@@ -30,9 +29,9 @@ exports.objWithNestedKey = objWithNestedKey;
  * Например для строки 'Я решаю задачу' - вернет 'учадаз юашер Я'
  */
 
-exports.reverseString = function(str) {
-  /** Ваш код */
-};
+exports.reverseString = function (str) {
+  return [...str].reverse().join('')
+}
 
 /**
  * Задача #4
@@ -42,9 +41,9 @@ exports.reverseString = function(str) {
  * Обратите внимание на порядок передаваемых аргументов в функцию
  */
 
-exports.discriminant = function(a, b, c){
-  /** Ваш код */
-};
+exports.discriminant = function (a, b, c) {
+  return b ** 2 - 4 * a * c
+}
 
 /**
  * Задача #5
@@ -52,21 +51,20 @@ exports.discriminant = function(a, b, c){
  * Например, 'java' и 'Java' - идентичные строки.
  */
 
-exports.compareStrings = function(str1, str2){
-  /** Ваш код */
-};
+exports.compareStrings = function (left, right) {
+  return left.toLowerCase() === right.toLowerCase()
+}
 
 /**
  * Задача #6
  * Написать функцию которая принимает объект и возвращает строку, составленную
- * из значений всех свойсвт объекта. После каждого значения,
+ * из значений всех свойств объекта. После каждого значения,
  * кроме последнего нужно добавить пробел.
  */
 
-exports.strFromObjValues = function(obj){
-  /** Ваш код */
-};
-
+exports.strFromObjValues = function (obj) {
+  return Object.keys(obj).map(key => obj[key]).join(' ')
+}
 
 /**
  * Задача #7
@@ -74,8 +72,8 @@ exports.strFromObjValues = function(obj){
  */
 
 exports.arrSortDesc = function (arr) {
-  /** Ваш код */
-};
+  return arr.sort((a, b) => b - a)
+}
 
 /**
  * Задача #8
@@ -84,9 +82,11 @@ exports.arrSortDesc = function (arr) {
  * Если входящий массив состоит меньше чем из 2 элементов - вернуть его без изменений
  */
 
-exports.getFirstAndLastElements = function(arr) {
-  /** Ваш код */
-};
+exports.getFirstAndLastElements = function (arr) {
+  const len = arr.length
+  if (len < 2) return arr
+  return [arr[0], arr[len - 1]]
+}
 
 /**
  * Задача #9
@@ -95,10 +95,9 @@ exports.getFirstAndLastElements = function(arr) {
  * Иначе false
  */
 
-exports.isIntegerDivisible = function(a, b) {
-  /** Ваш код */
-};
-
+exports.isIntegerDivisible = function (a, b) {
+  return a % b === 0
+}
 
 /**
  * Задача #10
@@ -107,9 +106,9 @@ exports.isIntegerDivisible = function(a, b) {
  * В этой задаче предположим что n не может быть отрицательным.
  */
 
-exports.calculateAllOddNumbersSum = function(n) {
-  /** Ваш код */
-};
+exports.calculateAllOddNumbersSum = function (n) {
+  return Math.ceil(n / 2) ** 2
+}
 
 /**
  * Задача #11
@@ -117,9 +116,11 @@ exports.calculateAllOddNumbersSum = function(n) {
  * (нужно написать функцию, которая будет возращать количество)
  */
 
-exports.positiveEvenNumbersCount = function(numbers) {
-  /** Ваш код */
-};
+exports.positiveEvenNumbersCount = function (numbers) {
+  // Лучше читается, но предположительно медленее из-за создания нового списка
+  // return numbers.filter(el => el > 0 && el % 2 === 0).length
+  return numbers.reduce((acc, el) => el > 0 && el % 2 === 0 ? acc + 1 : acc, 0)
+}
 
 /**
  * Задача #12
@@ -127,6 +128,8 @@ exports.positiveEvenNumbersCount = function(numbers) {
  * длине строки элемента исходного массива
  */
 
-exports.wordsLength = function(words) {
-  /** Ваш код */
-};
+exports.wordsLength = function (words) {
+  return words.map(
+    (el) => el.toString().length
+  )
+}
