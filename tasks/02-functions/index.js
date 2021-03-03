@@ -8,10 +8,12 @@
  * создать сколько угодно.
  */
 
-export function sequence(start, step) {
-    /** Ваш код */
+export function sequence (start = 0, step = 1) {
+  return function () {
+    start += step
+    return start
+  }
 }
-
 
 /**
  * Задача #2
@@ -21,12 +23,14 @@ export function sequence(start, step) {
  * а в качестве начального значения используется this.sum
  */
 
-export function sum() {
-    /** Ваш код */
+export function sum (...args) {
+  return args.reduce((acc, el) => acc + el, this.sum)
 }
 
-export function bind() {
-    /** Ваш код */
+export function bind (func, context, ...boundArgs) {
+  return function (...args) {
+    return func.apply(context, [...boundArgs, ...args])
+  }
 }
 
 /**
@@ -37,6 +41,15 @@ export function bind() {
  * вывести в консоль содержимое «хранилища». Принимаем за хранилище обычный массив.
  */
 
-export function createStorage() {
-    /** Ваш код */
+export function createStorage () {
+  const storage = []
+  return function (...args) {
+    if (args.length === 0) {
+      return [...storage]
+    } else {
+      args.forEach(el => storage.push(String(el)))
+      // 1 или 2?
+      // Array.prototype.push.apply(storage, args.map(String))
+    }
+  }
 }
