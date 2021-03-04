@@ -27,8 +27,8 @@ class Dog {
   /** Ваш код */
 }
 
-exports.Cat = Cat;
-exports.Dog = Dog;
+exports.Cat = Cat
+exports.Dog = Dog
 
 /**
  * Задача #2
@@ -50,7 +50,7 @@ class Clock {
   /** Ваш код */
 }
 
-exports.Clock = Clock;
+exports.Clock = Clock
 
 /**
  * Задача #3
@@ -74,15 +74,15 @@ exports.Clock = Clock;
  */
 
 class Cuboid {
-  constructor() {
+  constructor () {
     /** Ваш код */
   }
 
-  get surfaceArea() {
+  get surfaceArea () {
     /** Ваш код */
   }
 
-  get volume() {
+  get volume () {
     /** Ваш код */
   }
 }
@@ -91,5 +91,5 @@ class Cube extends Cuboid {
   /** Ваш код */
 }
 
-exports.Cuboid = Cuboid;
-exports.Cube = Cube;
+exports.Cuboid = Cuboid
+exports.Cube = Cube
