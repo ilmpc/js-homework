@@ -38,33 +38,32 @@ describe('function sequence', () => {
 })
 
 describe('function bind', () => {
-  it('should set context and sum params', () => {
-    function returnContext () {
-      return this
-    }
-    returnContext.sum = 0
-    
-    const fakeBind = bind(sum, returnContext, 12)
+  function returnContext (...nums) {
+    if (!nums.length) return this
+    return this + nums.reduce((acc, el) => acc + el)
+  }
+  it('should set context to function', () => {
+    const fakeBind = bind(returnContext, 12)
     expect(fakeBind()).toEqual(12)
 
-    const fakeBind05 = bind(sum, returnContext, 5, 10, 8)
-    expect(fakeBind05(3, 1)).toEqual(27)
-
-    const fakeBind1 = bind(sum, returnContext, null)
+    const fakeBind1 = bind(returnContext, null)
     expect(fakeBind1()).toEqual(null)
 
-    const fakeBind2 = bind(sum, returnContext)
+    const fakeBind2 = bind(returnContext)
     expect(fakeBind2()).toBeUndefined()
+  })
+  it('should set context and pass parameters', () => {
+    const fakeBind3 = bind(returnContext, 5, 5)
+    expect(fakeBind3()).toEqual(10)
+
+    const fakeBind4 = bind(returnContext, '5', 5)
+    expect(fakeBind4()).toEqual('55')
   })
 })
 
 describe('function sum', () => {
-  it('should return undefined on this.sum', () => {
-    try {
-      const result = sum(2, 3)
-    } catch (e) {
-      expect(e).toBeDefined()
-    }
+  it('should return undefined if no context set', () => {
+    expect(() => sum(2, 3)).toThrow()
   })
 
   it('should return valide result', () => {

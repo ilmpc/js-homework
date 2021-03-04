@@ -17,8 +17,6 @@ export function sequence (start = 0, step = 1) {
 
 /**
  * Задача #2
- *
- * Напишите свою функцию bind, которая привязывает контекст к функции суммирования.
  * Функция суммирования возвращает сумму всех переданных аргрументов,
  * а в качестве начального значения используется this.sum
  */
@@ -27,9 +25,13 @@ export function sum (...args) {
   return args.reduce((acc, el) => acc + el, this.sum)
 }
 
-export function bind (func, context, ...boundArgs) {
-  return function (...args) {
-    return func.apply(context, [...boundArgs, ...args])
+/**
+ * Задача #2.5
+ * Напишите свою функцию bind, которая привязывает контекст к функции и частично примеяет её.
+ */
+export function bind (func, context, ...args) {
+  return function (...innerArgs) {
+    return func.apply(context, [...args, ...innerArgs])
   }
 }
 
