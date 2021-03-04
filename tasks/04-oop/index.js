@@ -16,15 +16,29 @@
  */
 
 class Animal {
-  /** Ваш код */
+  constructor (name) {
+    this.name = name
+  }
+
+  get phrase () {
+    return ''
+  }
+
+  say () {
+    return `${this.name} says ${this.phrase}`
+  }
 }
 
-class Cat {
-  /** Ваш код */
+class Cat extends Animal {
+  get phrase () {
+    return 'meow'
+  }
 }
 
-class Dog {
-  /** Ваш код */
+class Dog extends Animal {
+  get phrase () {
+    return 'wow'
+  }
 }
 
 exports.Cat = Cat
