@@ -10,8 +10,8 @@ test:
   stage: test
   before_script:
     - yarn config set cache-folder .yarn
-    - yarn install 
-  script: yarn test
+    - yarn install
+  script: yarn run jest --ci --reporters=default --reporters=jest-junit
   only:
     - 01-basic-implementation
     - 02-functions-implementation
@@ -19,6 +19,10 @@ test:
     - 05-dom-events-implementation
   tags:
     - node
+  artifacts:
+    when: always
+    reports:
+      junit: junit.xml
 
 variables:
   GIT_SSL_NO_VERIFY: "true"

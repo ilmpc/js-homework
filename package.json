@@ -23,6 +23,7 @@
     "@babel/preset-env": "^7.13.9",
     "babel-jest": "22.1.0",
     "jest": "^24",
+    "jest-junit": "^10",
     "standard": "^12"
   },
   "dependencies": {},
