@@ -61,7 +61,18 @@ exports.Dog = Dog
  * clock.stop();
  */
 class Clock {
-  /** Ваш код */
+  constructor (options) {
+    this._tickTimeout = options?.tickTimeout ?? 1000
+  }
+
+  start (callback) {
+    this._interval = setInterval(callback, this._tickTimeout)
+  }
+
+  stop () {
+    // Do nothing if ID incorrect
+    clearInterval(this._interval)
+  }
 }
 
 exports.Clock = Clock
@@ -88,21 +99,27 @@ exports.Clock = Clock
  */
 
 class Cuboid {
-  constructor () {
-    /** Ваш код */
+  constructor (length, width, height) {
+    this._sides = [length, width, height]
   }
 
   get surfaceArea () {
-    /** Ваш код */
+    // return this._sides.reduce((acc, el, cur, arr) => acc + 2 * el * arr[(cur + 1) % arr.length], 0)
+    const s = this._sides
+    return 2 * (s[0] * s[1] + s[1] * s[2] + s[2] * s[0])
   }
 
   get volume () {
-    /** Ваш код */
+    // return this._sides.reduce((acc, el) => acc * el)
+    const s = this._sides
+    return s[0] * s[1] * s[2]
   }
 }
 
 class Cube extends Cuboid {
-  /** Ваш код */
+  constructor (side) {
+    super(side, side, side)
+  }
 }
 
 exports.Cuboid = Cuboid
