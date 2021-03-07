@@ -1,25 +1,27 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML</title>
-    <link rel="stylesheet" href="main.css">
-</head>
-<body>
-<!--
-  Задача
 
-  Сверстать карточку превью публикации в соц. сети, блоге, и т.д.
-  Дизайн можно позаимствовать у любой соц. сети или блога.
-  Обязательные параметры:
-    - дата публикации
-    - имя автора
-    - текст публикации (или его начало + ‘...’, если текст длинный)
-    - заголовок/тема
-    - кнопка для лайка и количество лайков
--->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HTML</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="post">
+    <div class="heading">Hi!</div>
+    <div class="author">Mark Chigrin</div>
+    <div class="create-date">07.03.2021</div>
+    <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula odio vestibulum ex posuere, quis laoreet arcu congue. Fusce bibendum ullamcorper nulla vel viverra. Fusce non gravida ante. Vivamus vulputate justo eget nulla placerat, eu bibendum est tempor. Donec quis finibus orci, sit amet mattis magna. Nullam molestie dignissim tincidunt. Aenean ultricies eros eget lorem vulputate cursus. Vivamus ac commodo quam.</div>
+    <div class="like">
+      <input type="checkbox" class="button">
+      <div class="amount">10</div>
+    </div>
+  </div>
+  <script type="module" src="index.js"></script>
 </body>
+
 </html>

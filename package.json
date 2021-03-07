@@ -13,16 +13,14 @@
     "type": "git",
     "url": "git@gitlab.school.noveogroup.com:internship/homework.git"
   },
-  "author": "",
+  "author": "ilmpc",
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-jest": "^22.1.0",
-    "babel-preset-es2015": "^6.24.1",
-    "jest": "^22.1.4",
-    "regenerator-runtime": "^0.11.1"
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "standard": "^16.0.3"
   },
-  "dependencies": {
-    "jquery": "^3.3.1"
-  },
+  "dependencies": {},
   "license": "ISC"
 }

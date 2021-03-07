@@ -1,0 +1,31 @@
+.post {
+    margin: 2vh 5vw 2vh 5vw;
+    display: flex;
+}
+
+.post > .heading {
+
+}
+
+.post > .author {
+
+}
+
+.post > .create-date {
+
+}
+
+.post > .content {
+
+}
+
+.post > .like > .button {
+    appearance: none;
+    border: 0.2em solid #4c00ff;
+    height: 2em;
+    width: 2em;
+}
+
+.post > .like > .amount {
+    
+}
