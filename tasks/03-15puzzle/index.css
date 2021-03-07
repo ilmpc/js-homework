@@ -1,0 +1,30 @@
+.hidden {
+    visibility: hidden;
+}
+
+#puzzle-table .p-3 {
+    cursor: default;
+    user-select: none;
+    width: 5em;
+    height: 5em;
+    text-align: center;
+    vertical-align: middle;
+}
+  
+#puzzle-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+  
+#win-message {
+    margin: auto;
+    text-align: center;
+}
+
+#solve-puzzle {
+    display: block;
+    margin: auto;
+}
+
+
