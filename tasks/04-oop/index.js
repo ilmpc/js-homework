@@ -61,8 +61,8 @@ exports.Dog = Dog
  * clock.stop();
  */
 class Clock {
-  constructor (options) {
-    this._tickTimeout = options?.tickTimeout ?? 1000
+  constructor ({ tickTimeout = 1000 } = {}) {
+    this._tickTimeout = tickTimeout
   }
 
   start (callback) {
@@ -70,7 +70,7 @@ class Clock {
   }
 
   stop () {
-    // Do nothing if ID incorrect
+    // clearInterval do nothing if ID incorrect
     clearInterval(this._interval)
   }
 }
@@ -100,19 +100,20 @@ exports.Clock = Clock
 
 class Cuboid {
   constructor (length, width, height) {
-    this._sides = [length, width, height]
+    this._sides = { length: length, width: width, height: height }
   }
 
   get surfaceArea () {
-    // return this._sides.reduce((acc, el, cur, arr) => acc + 2 * el * arr[(cur + 1) % arr.length], 0)
-    const s = this._sides
-    return 2 * (s[0] * s[1] + s[1] * s[2] + s[2] * s[0])
+    return Object.values(this._sides)
+      .reduce(
+        (acc, el, cur, arr) => acc + 2 * el * arr[(cur + 1) % arr.length],
+        0
+      )
   }
 
   get volume () {
-    // return this._sides.reduce((acc, el) => acc * el)
-    const s = this._sides
-    return s[0] * s[1] * s[2]
+    return Object.values(this._sides)
+      .reduce((acc, el) => acc * el)
   }
 }
 
