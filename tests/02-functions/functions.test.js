@@ -104,4 +104,13 @@ describe('function storage', () => {
 
     expect(storage2()).toEqual(['null', '2'])
   })
+  it('storage should not changed after changing returned array', () => {
+    const storage = createStorage()
+    const lines = ['Hi', 'There', 'Are you ok?']
+    storage(...lines)
+    expect(storage()).toEqual(lines)
+    const returnedArray = storage()
+    returnedArray.pop()
+    expect(storage()).toEqual(lines)
+  })
 })

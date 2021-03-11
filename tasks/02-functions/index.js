@@ -49,9 +49,7 @@ export function createStorage () {
     if (args.length === 0) {
       return [...storage]
     } else {
-      args.forEach(el => storage.push(String(el)))
-      // 1 или 2?
-      // Array.prototype.push.apply(storage, args.map(String))
+      Array.prototype.push.apply(storage, args.map(String))
     }
   }
 }
