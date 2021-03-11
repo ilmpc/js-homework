@@ -3,7 +3,7 @@ stages:
 
 test:
   stage: test
-  script: npm i && npm test
+  script: yarn && yarn test
   environment: test
   only:
     - 01-basic-implementation

@@ -63,7 +63,7 @@ exports.compareStrings = function (left, right) {
  */
 
 exports.strFromObjValues = function (obj) {
-  return Object.keys(obj).map(key => obj[key]).join(' ')
+  return Object.values(obj).join(' ')
 }
 
 /**
@@ -83,9 +83,10 @@ exports.arrSortDesc = function (arr) {
  */
 
 exports.getFirstAndLastElements = function (arr) {
-  const len = arr.length
-  if (len < 2) return arr
-  return [arr[0], arr[len - 1]]
+  if (arr.length < 2) {
+    return arr
+  }
+  return [arr[0], arr[arr.length - 1]]
 }
 
 /**
@@ -117,9 +118,7 @@ exports.calculateAllOddNumbersSum = function (n) {
  */
 
 exports.positiveEvenNumbersCount = function (numbers) {
-  // Лучше читается, но предположительно медленее из-за создания нового списка
-  // return numbers.filter(el => el > 0 && el % 2 === 0).length
-  return numbers.reduce((acc, el) => el > 0 && el % 2 === 0 ? acc + 1 : acc, 0)
+  return numbers.filter(el => el > 0 && el % 2 === 0).length
 }
 
 /**
