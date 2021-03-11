@@ -7,10 +7,10 @@
  * иначе вывести ошибку, что такого пользователя не существует.
  * Во время выполнения запроса показывать лоадер.
  */
-export function getUser() {
+export function getUser () {
   /** Ваш код */
 }
 
-export function showUserAvatar() {
+export function showUserAvatar () {
   /** Ваш код */
 }
