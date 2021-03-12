@@ -1,16 +1,42 @@
-/**
- * Задача #1
- *
- * Сверстать форму с полем для ввода и кнопкой submit. В поле ввода необходимо ввести любой никнейм,
- * после подтверждения формы отправить запрос на api.github (https://api.github.com/users/{nickname})
- * на получение юзера, если юзер с таким никнеймом существует, показать его аватар,
- * иначе вывести ошибку, что такого пользователя не существует.
- * Во время выполнения запроса показывать лоадер.
- */
-export function getUser () {
-  /** Ваш код */
+function doAfter (target, afterWork) {
+  return (...args) => {
+    Object.apply(target, args)
+    afterWork()
+  }
 }
 
-export function showUserAvatar () {
-  /** Ваш код */
+function carry (target, ...args) {
+  return (...remainArgs) => {
+    Object.apply(target, [...args, ...remainArgs])
+  } 
 }
+
+function suggestUsers (event) {
+  // unhide list
+  // add scroller
+  // download data
+  // remove scroller
+  // display data
+}
+
+function displayUser (event) {
+  // hide suggestList
+  // read username
+  // add loader
+  // download data
+  // remove loader
+  // display data
+}
+
+function pickUserFromDropdown (event) {
+  // insert name into search box
+  displayUser(event)
+}
+
+const searchBox = document.getElementById('search-box')
+const searchForm = document.getElementById('search-form')
+const searchDropdown = document.getElementById('search-box-dropdown')
+
+searchBox.addEventListener('input', suggestUsers)
+searchForm.addEventListener('submit', displayUser)
+searchDropdown.addEventListener('click', pickUserFromDropdown)

@@ -1,16 +1,3 @@
-export function oneToOne (f, ...args) {
-  if (args.length === 0) {
-    return
-  }
-  function decorate (callback) {
-    return (...callbackArgs) => {
-      callback(...callbackArgs)
-      oneToOne(f, ...args.slice(1))
-    }
-  }
-  f(decorate(args[0].callback), ...args[0].args)
-}
-
 export function getSome (callback, url) {
   const request = new document.XMLHttpRequest()
   request.open('GET', url, true)
