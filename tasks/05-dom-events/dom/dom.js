@@ -6,7 +6,50 @@
  * соответствующих этому тегу. (без использования getElementsByTagName)
  */
 export function search (element, tagName = '') {
-  /** Ваш код */
+  const founded = []
+  if (!tagName) { return founded }
+
+  tagName = tagName.toUpperCase()
+  const takeAll = tagName === '*'
+  const queue = new Queue()
+  queue.push(element)
+
+  while (queue.length > 0) {
+    const node = queue.shift()
+    if ((takeAll && node.tagName) || node.tagName === tagName) {
+      founded.push(node)
+    }
+    queue.concat(Array.from(node.children))
+  }
+
+  return founded
+}
+
+class Queue {
+  constructor () {
+    this._inputStack = []
+    this._outputStack = []
+  }
+
+  push (...items) {
+    Array.prototype.push.apply(this._inputStack, items)
+  }
+
+  concat (items) {
+    Array.prototype.push.apply(this._inputStack, items)
+  }
+
+  shift () {
+    if (this._outputStack.length === 0) {
+      this._outputStack = this._inputStack.reverse()
+      this._inputStack = []
+    }
+    return this._outputStack.pop()
+  }
+
+  get length () {
+    return this._inputStack.length + this._outputStack.length
+  }
 }
 
 /**

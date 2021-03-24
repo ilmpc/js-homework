@@ -47,7 +47,14 @@ New
   import { search, normalize } from './dom.js';
 
   window.runTask1 = function () {
-    /** Ваш код для проверки **/
+    const s1 = search(document, '')
+    console.log(s1.length === 0, s1)
+    const s2 = search(document, '*')
+    console.log(s2.length === document.getElementsByTagName('*').length, s2)
+    const s3 = search(document, 'div')
+    console.log(s3.length === document.getElementsByTagName('div').length, s3)
+    const s4 = search(document, 'li')
+    console.log(s4.length === document.getElementsByTagName('li').length, s4)
   };
 
   window.runTask2 = function () {
