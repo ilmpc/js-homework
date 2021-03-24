@@ -45,11 +45,11 @@ export function bind (func, context, ...args) {
 
 export function createStorage () {
   const storage = []
-  return function (...args) {
-    if (args.length === 0) {
+  return function (item) {
+    if (item === undefined) {
       return [...storage]
     } else {
-      Array.prototype.push.apply(storage, args.map(String))
+      storage.push(String(item))
     }
   }
 }

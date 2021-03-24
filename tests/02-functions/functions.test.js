@@ -107,7 +107,7 @@ describe('function storage', () => {
   it('storage should not changed after changing returned array', () => {
     const storage = createStorage()
     const lines = ['Hi', 'There', 'Are you ok?']
-    storage(...lines)
+    lines.forEach((el) => storage(el))
     expect(storage()).toEqual(lines)
     const returnedArray = storage()
     returnedArray.pop()
