@@ -5,7 +5,7 @@
  * которая принимает на вход document и имя тега, а возвращает массив из всех элементов,
  * соответствующих этому тегу. (без использования getElementsByTagName)
  */
-export function search(element, tagName = '') {
+export function search (element, tagName = '') {
   /** Ваш код */
 }
 
@@ -18,6 +18,34 @@ export function search(element, tagName = '') {
  *
  * Самый простой способ найти все элементы в документе – document.body.getElementsByTagName('*')
  */
-export function normalize(localDocument) {
-  /** Ваш код */
+export function normalize (localDocument) {
+  const elements = Array.from(localDocument.getElementsByTagName('*'))
+  elements
+    .forEach((el) => {
+      if (el.className) {
+        el.className = convertClassesStringToCamelCase(el.className)
+      }
+    })
 }
+
+function capitalize (str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
+function kebabToCamelCase (str) {
+  return str
+    .split('-')
+    .filter((el) => !!el)
+    .map((el, ind) => ind === 0 ? el : capitalize(el))
+    .join('')
+}
+
+function convertClassesStringToCamelCase (str) {
+  return str
+    .split(' ')
+    .filter((el) => !!el)
+    .map(kebabToCamelCase)
+    .join(' ')
+}
+
+export const _testable = { capitalize: capitalize, kebabToCamelCase: kebabToCamelCase, convertClassesStringToCamelCase: convertClassesStringToCamelCase }
