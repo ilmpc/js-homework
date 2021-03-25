@@ -104,16 +104,13 @@ class Cuboid {
   }
 
   get surfaceArea () {
-    return Object.values(this._sides)
-      .reduce(
-        (acc, el, cur, arr) => acc + 2 * el * arr[(cur + 1) % arr.length],
-        0
-      )
+    const { length, width, height } = this._sides
+    return 2 * (length * width + width * height + height * length)
   }
 
   get volume () {
-    return Object.values(this._sides)
-      .reduce((acc, el) => acc * el)
+    const { length, width, height } = this._sides
+    return length * width * height
   }
 }
 
