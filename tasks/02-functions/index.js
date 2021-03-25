@@ -8,25 +8,31 @@
  * создать сколько угодно.
  */
 
-export function sequence(start, step) {
-    /** Ваш код */
+export function sequence (start = 0, step = 1) {
+  return function () {
+    start += step
+    return start
+  }
 }
-
 
 /**
  * Задача #2
- *
- * Напишите свою функцию bind, которая привязывает контекст к функции суммирования.
  * Функция суммирования возвращает сумму всех переданных аргрументов,
  * а в качестве начального значения используется this.sum
  */
 
-export function sum() {
-    /** Ваш код */
+export function sum (...args) {
+  return args.reduce((acc, el) => acc + el, this.sum)
 }
 
-export function bind() {
-    /** Ваш код */
+/**
+ * Задача #2.5
+ * Напишите свою функцию bind, которая привязывает контекст к функции и частично примеяет её.
+ */
+export function bind (func, context, ...args) {
+  return function (...innerArgs) {
+    return func.apply(context, [...args, ...innerArgs])
+  }
 }
 
 /**
@@ -37,6 +43,13 @@ export function bind() {
  * вывести в консоль содержимое «хранилища». Принимаем за хранилище обычный массив.
  */
 
-export function createStorage() {
-    /** Ваш код */
+export function createStorage () {
+  const storage = []
+  return function (item) {
+    if (item === undefined) {
+      return [...storage]
+    } else {
+      storage.push(String(item))
+    }
+  }
 }
