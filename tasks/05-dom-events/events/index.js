@@ -1,4 +1,4 @@
-function getCellCoord (cell) {
+function getCellCoordinates (cell) {
   return [cell.cellIndex, cell.parentNode.rowIndex]
 }
 
@@ -6,9 +6,10 @@ function getEmptyCell (table) {
   return table.querySelector('.table-active')
 }
 
-function isCellsExchangeable (left, right) {
-  left = getCellCoord(left)
-  right = getCellCoord(right)
+function isCellsExchangeable (leftCell, rightCell) {
+  const left = getCellCoordinates(leftCell)
+  const right = getCellCoordinates(rightCell)
+  // Сравнение координат двух ячеек (2D-точек)
   const isNear = (a, b) => a[0] === b[0] && Math.abs(a[1] - b[1]) === 1
   return isNear(left, right) || isNear(left.reverse(), right.reverse())
 }

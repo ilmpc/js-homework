@@ -21,7 +21,7 @@
     "babel-preset-es2015": "^6.24.1",
     "jest": "^22.1.4",
     "regenerator-runtime": "^0.11.1",
-    "standard": "^16.0.3"
+    "standard": "^12.0.1"
   },
   "dependencies": {},
   "standard": {

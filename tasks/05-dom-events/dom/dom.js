@@ -78,7 +78,7 @@ function capitalize (str) {
 function kebabToCamelCase (str) {
   return str
     .split('-')
-    .filter((el) => !!el)
+    .filter(Boolean)
     .map((el, ind) => ind === 0 ? el : capitalize(el))
     .join('')
 }
@@ -86,7 +86,7 @@ function kebabToCamelCase (str) {
 function convertClassesStringToCamelCase (str) {
   return str
     .split(' ')
-    .filter((el) => !!el)
+    .filter(Boolean)
     .map(kebabToCamelCase)
     .join(' ')
 }
