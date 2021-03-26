@@ -16,19 +16,33 @@
  */
 
 class Animal {
-  /** Ваш код */
+  constructor (name) {
+    this.name = name
+  }
+
+  get phrase () {
+    return ''
+  }
+
+  say () {
+    return `${this.name} says ${this.phrase}`
+  }
 }
 
-class Cat {
-  /** Ваш код */
+class Cat extends Animal {
+  get phrase () {
+    return 'meow'
+  }
 }
 
-class Dog {
-  /** Ваш код */
+class Dog extends Animal {
+  get phrase () {
+    return 'wow'
+  }
 }
 
-exports.Cat = Cat;
-exports.Dog = Dog;
+exports.Cat = Cat
+exports.Dog = Dog
 
 /**
  * Задача #2
@@ -47,10 +61,21 @@ exports.Dog = Dog;
  * clock.stop();
  */
 class Clock {
-  /** Ваш код */
+  constructor ({ tickTimeout = 1000 } = {}) {
+    this._tickTimeout = tickTimeout
+  }
+
+  start (callback) {
+    this._interval = setInterval(callback, this._tickTimeout)
+  }
+
+  stop () {
+    // clearInterval do nothing if ID incorrect
+    clearInterval(this._interval)
+  }
 }
 
-exports.Clock = Clock;
+exports.Clock = Clock
 
 /**
  * Задача #3
@@ -74,22 +99,26 @@ exports.Clock = Clock;
  */
 
 class Cuboid {
-  constructor() {
-    /** Ваш код */
+  constructor (length, width, height) {
+    this._sides = { length: length, width: width, height: height }
   }
 
-  get surfaceArea() {
-    /** Ваш код */
+  get surfaceArea () {
+    const { length, width, height } = this._sides
+    return 2 * (length * width + width * height + height * length)
   }
 
-  get volume() {
-    /** Ваш код */
+  get volume () {
+    const { length, width, height } = this._sides
+    return length * width * height
   }
 }
 
 class Cube extends Cuboid {
-  /** Ваш код */
+  constructor (side) {
+    super(side, side, side)
+  }
 }
 
-exports.Cuboid = Cuboid;
-exports.Cube = Cube;
+exports.Cuboid = Cuboid
+exports.Cube = Cube
