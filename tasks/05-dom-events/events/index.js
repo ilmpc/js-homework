@@ -6,45 +6,43 @@ function getEmptyCell (table) {
   return table.querySelector('.table-active')
 }
 
-function isCellsExchangeable (leftCell, rightCell) {
-  const left = getCellCoordinates(leftCell)
-  const right = getCellCoordinates(rightCell)
-  // Сравнение координат двух ячеек (2D-точек)
-  const isNear = (a, b) => a[0] === b[0] && Math.abs(a[1] - b[1]) === 1
-  return isNear(left, right) || isNear(left.reverse(), right.reverse())
+function isCellsExchangeable (cellA, cellB) {
+  const [columnA, rowA] = getCellCoordinates(cellA)
+  const [columnB, rowB] = getCellCoordinates(cellB)
+  const diffColumn = Math.abs(columnA - columnB)
+  const diffRow = Math.abs(rowA - rowB)
+
+  return diffColumn + diffRow === 1
 }
 
-function exchangeNodes (left, right) {
-  if (left === right) {
+function exchangeNodes (nodeA, nodeB) {
+  if (nodeA === nodeB) {
     return
   }
-  const marker = document.createElement('div')
-  left.parentNode.insertBefore(marker, left)
-  right.parentNode.insertBefore(left, right)
-  marker.parentNode.insertBefore(right, marker)
-  marker.parentNode.removeChild(marker)
+  ;[nodeA.innerText, nodeB.innerText] = [nodeB.innerText, nodeA.innerText]
+  ;[nodeA.className, nodeB.className] = [nodeB.className, nodeA.className]
 }
 
-function isPuzzleCompleted (table) {
+function isPuzzleSolved (table) {
   const cells = table.querySelectorAll('td')
   return Array
     .from(cells)
-    .map((el) => +el.innerText)
-    .filter((el) => el !== 0)
-    .every((el, i) => el === i + 1)
+    .map((element) => +element.innerText)
+    .filter((element) => element !== 0)
+    .every((element, index) => element === index + 1)
 }
 
 function solvePuzzle (table) {
   const cells = table.querySelectorAll('td')
-  cells.forEach((el, i) => {
-    if (i !== 15) {
-      el.innerText = i + 1
+  cells.forEach((element, index) => {
+    if (index !== 15) {
+      element.innerText = index + 1
     } else {
-      el.innerText = ''
+      element.innerText = ''
     }
   })
 }
-function reactOnPuzzleSolved (table, tableEvent) {
+function onPuzzleSolved (table, tableEvent) {
   getEmptyCell(table).classList.remove('table-active')
   document.getElementById('win-message').classList.remove('hidden')
   table.removeEventListener('click', tableEvent)
@@ -56,8 +54,8 @@ function movePuzzleHandler ({ target: cell, currentTarget: table }) {
     return
   }
   exchangeNodes(cell, emptyCell)
-  if (isPuzzleCompleted(table)) {
-    reactOnPuzzleSolved(table, this)
+  if (isPuzzleSolved(table)) {
+    onPuzzleSolved(table, this)
   }
 }
 
@@ -70,5 +68,5 @@ const solveButton = document.getElementById('solve-puzzle')
 solveButton.addEventListener('click', ({ target: button }) => {
   button.classList.add('hidden')
   solvePuzzle(puzzleTable)
-  reactOnPuzzleSolved(puzzleTable, movePuzzleHandler)
+  onPuzzleSolved(puzzleTable, movePuzzleHandler)
 })
