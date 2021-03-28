@@ -4,21 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>XHR</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <header>
       <h1>Search Github users</h1>
       <form id="search-form">
-        <input type="search" name="q" id="search-box" autocomplete="off">
-        <div id="search-box-dropdown">
-          <ul>
-          </ul>
-        </div>
+        <input type="search" name="q" autocomplete="off">
+        <input type="submit">
       </form>
     </header>
     <main>
-      Some text
+      <div class="loader hidden"><div></div><div></div><div></div><div></div></div>
+      <div class="data hidden"><img alt="photo"/></div>
+      <div class="error hidden"></div>
     </main>
     <script type="module" src="index.js"></script>
     <script type="module" src="githubFaces.js"></script>

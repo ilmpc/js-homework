@@ -1,42 +1,51 @@
-function doAfter (target, afterWork) {
-  return (...args) => {
-    Object.apply(target, args)
-    afterWork()
+import getAvatartURL from './githubFaces.js'
+
+const loaderElement = document.querySelector('main > .loader')
+const dataElement = document.querySelector('main > .data')
+const photoElement = dataElement.querySelector('.data > img[alt=photo]')
+const errorElement = document.querySelector('main > .error')
+const searchForm = document.getElementById('search-form')
+
+searchForm.addEventListener('submit', onSubmitUserSearch)
+
+function onSubmitUserSearch (event) {
+  event.preventDefault()
+  ;[dataElement, errorElement].forEach(hide)
+  unhide(loaderElement)
+
+  const nick = event.target.elements['q'].value
+  if (nick) {
+    getAvatartURL(onSuccessfulGetUserAvatarURL, getHandlerErrorGetUserAvatarURL(nick), nick)
+  } else {
+    hide(loaderElement)
   }
 }
 
-function carry (target, ...args) {
-  return (...remainArgs) => {
-    Object.apply(target, [...args, ...remainArgs])
-  } 
+function onSuccessfulGetUserAvatarURL (url) {
+  photoElement.setAttribute('src', url)
+  const whenLoad = photoElement.addEventListener('load', (event) => {
+    unhide(dataElement)
+    hide(loaderElement)
+    photoElement.removeEventListener('load', whenLoad)
+  })
 }
 
-function suggestUsers (event) {
-  // unhide list
-  // add scroller
-  // download data
-  // remove scroller
-  // display data
+function getHandlerErrorGetUserAvatarURL (nick) {
+  return (request) => {
+    if (request.status === 404) {
+      errorElement.innerHTML = `User <strong>${nick}</strong> not found`
+    } else {
+      errorElement.innerText = JSON.parse(request.responseText).message
+    }
+    unhide(errorElement)
+    hide(loaderElement)
+  }
 }
 
-function displayUser (event) {
-  // hide suggestList
-  // read username
-  // add loader
-  // download data
-  // remove loader
-  // display data
+function hide (element) {
+  element.classList.add('hidden')
 }
 
-function pickUserFromDropdown (event) {
-  // insert name into search box
-  displayUser(event)
+function unhide (element) {
+  element.classList.remove('hidden')
 }
-
-const searchBox = document.getElementById('search-box')
-const searchForm = document.getElementById('search-form')
-const searchDropdown = document.getElementById('search-box-dropdown')
-
-searchBox.addEventListener('input', suggestUsers)
-searchForm.addEventListener('submit', displayUser)
-searchDropdown.addEventListener('click', pickUserFromDropdown)

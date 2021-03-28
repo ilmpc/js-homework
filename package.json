@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "babel tasks -d bin"
+    "build": "babel tasks -d bin",
+    "format": "yarn run standard --fix"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+.hidden {
+  display: none !important;
+}
+
+.error {
+  color: red;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2em;
+}
+
+header h1 {
+  user-select: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Jost', sans-serif;
+  background-color: #EEEEEE;
+}
+
+/* Loader */
+.loader {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .loader div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #888888;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .loader div:nth-child(1) {
+    left: 8px;
+    animation: loader1 0.6s infinite;
+  }
+  .loader div:nth-child(2) {
+    left: 8px;
+    animation: loader2 0.6s infinite;
+  }
+  .loader div:nth-child(3) {
+    left: 32px;
+    animation: loader2 0.6s infinite;
+  }
+  .loader div:nth-child(4) {
+    left: 56px;
+    animation: loader3 0.6s infinite;
+  }
+  @keyframes loader1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes loader3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes loader2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+
