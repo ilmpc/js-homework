@@ -16,20 +16,20 @@
  * !!!! axios и fetch уже есть в области видимости (необходимо просто использовать) !!!!
  */
 
-import PromiseXHR from '../promise-xhr';
+import PromiseXHR from '../promise-xhr'
 
-export function getUserByPromiseXHR() {
+export function getUserByPromiseXHR () {
   /** Ваш код */
 }
 
-export function getUserByFetch() {
+export function getUserByFetch () {
   /** Ваш код */
 }
 
-export function getUserByAxios() {
+export function getUserByAxios () {
   /** Ваш код */
 }
 
-export function showUserAvatar() {
+export function showUserAvatar () {
   /** Ваш код */
 }

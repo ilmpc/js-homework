@@ -19,6 +19,6 @@ export class PromiseXHR {
   /** Ваш код */
 }
 
-export function getUserByPromiseXHR() {
+export function getUserByPromiseXHR () {
   /** Ваш код */
 }

@@ -14,16 +14,16 @@
  * !!!! axios и fetch уже есть в области видимости (необходимо просто использовать) !!!!
  */
 
-import PromiseXHR from '../promise-xhr';
+import PromiseXHR from '../promise-xhr'
 
-export function getResponseByPromiseXHR() {
+export function getResponseByPromiseXHR () {
   /** Ваш код */
 }
 
-export function getResponseByFetch() {
+export function getResponseByFetch () {
   /** Ваш код */
 }
 
-export function getResponseByAxios() {
+export function getResponseByAxios () {
   /** Ваш код */
 }
