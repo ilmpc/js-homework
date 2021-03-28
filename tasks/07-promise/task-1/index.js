@@ -1,22 +1,63 @@
-/**
- * Задача #1
- *
- * Сверстать форму с полем для ввода и тремя кнопками.
- *
- * Каждая кнопка должна отправлять запрос одним из способов:
- * 1) через обертку Promise над XHR (https://codesandbox.io/s/l47zmkw84z);
- * 2) через fetch (https://developer.mozilla.org/ru/docs/Web/API/Fetch_API);
- * 3) через axios (https://github.com/axios/axios).
- * В поле ввода необходимо ввести любой никнейм,
- * после подтверждения формы отправить запрос на api.github (https://api.github.com/users/{nickname})
- * на получение юзера, если юзер с таким никнеймом существует, показать его аватар,
- * иначе вывести ошибку,
- * что такого пользователя не существует.
- *
- * !!!! axios и fetch уже есть в области видимости (необходимо просто использовать) !!!!
- */
+import PromiseXHR from '../promise-xhr.js'
+import getAvatartURL from './githubFaces.js'
 
-import PromiseXHR from '../promise-xhr'
+const loaderElement = document.querySelector('main > .loader')
+const dataElement = document.querySelector('main > .data')
+const photoElement = dataElement.querySelector('.data > img[alt=photo]')
+const errorElement = document.querySelector('main > .error')
+const searchForm = document.getElementById('search-form')
+
+searchForm.addEventListener('submit', onSubmitUserSearch)
+
+// clear div
+// nick, type
+// animation
+// request(type, nick)
+// then(stop animation)
+// catch(error)
+function onSubmitUserSearch (event) {
+  event.preventDefault()
+  ;[dataElement, errorElement].forEach(hide)
+  unhide(loaderElement)
+
+  const nick = event.target.elements.q.value
+  const type = event.target.element.type.value
+  
+  if (nick) {
+    getAvatartURL(onSuccessfulGetUserAvatarURL, getHandlerErrorGetUserAvatarURL(nick), nick)
+  } else {
+    hide(loaderElement)
+  }
+}
+
+function onSuccessfulGetUserAvatarURL (url) {
+  photoElement.setAttribute('src', url)
+  const whenLoad = photoElement.addEventListener('load', (event) => {
+    unhide(dataElement)
+    hide(loaderElement)
+    photoElement.removeEventListener('load', whenLoad)
+  })
+}
+
+function getHandlerErrorGetUserAvatarURL (nick) {
+  return (request) => {
+    if (request.status === 404) {
+      errorElement.innerHTML = `User <strong>${nick}</strong> not found`
+    } else {
+      errorElement.innerText = JSON.parse(request.responseText).message
+    }
+    unhide(errorElement)
+    hide(loaderElement)
+  }
+}
+
+function hide (element) {
+  element.classList.add('hidden')
+}
+
+function unhide (element) {
+  element.classList.remove('hidden')
+}
 
 export function getUserByPromiseXHR () {
   /** Ваш код */
