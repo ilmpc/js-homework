@@ -1,5 +1,5 @@
-import PromiseXHR from '../promise-xhr.js'
-import getAvatartURL from './githubFaces.js'
+import Downloaders from './downloaders.js'
+import { getErrorTextFromRequest as getErrorTextFromGithubRequest, getAvatartURL as getGithubAvatarURL } from './githubFaces.js'
 
 const loaderElement = document.querySelector('main > .loader')
 const dataElement = document.querySelector('main > .data')
@@ -13,42 +13,38 @@ searchForm.addEventListener('submit', onSubmitUserSearch)
 // nick, type
 // animation
 // request(type, nick)
-// then(stop animation)
+// then(show user)
 // catch(error)
+// then(stop animation)
 function onSubmitUserSearch (event) {
   event.preventDefault()
+
+  const nick = event.target.elements.q.value
+  const downloader = Downloaders[event.target.elements.type.value]
+
+  if (nick) { return }
+
   ;[dataElement, errorElement].forEach(hide)
   unhide(loaderElement)
 
-  const nick = event.target.elements.q.value
-  const type = event.target.element.type.value
-  
-  if (nick) {
-    getAvatartURL(onSuccessfulGetUserAvatarURL, getHandlerErrorGetUserAvatarURL(nick), nick)
-  } else {
-    hide(loaderElement)
-  }
+  getGithubAvatartURL(downloader, nick)
+    .then((url) => putUrlInImgNode(url, photoElement))
+    .then(() => unhide(dataElement))
+    .catch((request) => {
+      errorElement.innerHTML = getErrorTextFromGithubRequest(request, nick)
+      unhide(errorElement)
+    })
+    .then(() => hide(loaderElement))
 }
 
-function onSuccessfulGetUserAvatarURL (url) {
-  photoElement.setAttribute('src', url)
-  const whenLoad = photoElement.addEventListener('load', (event) => {
-    unhide(dataElement)
-    hide(loaderElement)
-    photoElement.removeEventListener('load', whenLoad)
+async function putUrlInImgNode (url, imgNode) {
+  imgNode.setAttribute('src', url)
+  return new Promise((resolve, reject) => {
+    const whenLoad = imgNode.addEventListener('load', (event) => {
+      imgNode.removeEventListener('load', whenLoad)
+      resolve()
+    })
   })
-}
-
-function getHandlerErrorGetUserAvatarURL (nick) {
-  return (request) => {
-    if (request.status === 404) {
-      errorElement.innerHTML = `User <strong>${nick}</strong> not found`
-    } else {
-      errorElement.innerText = JSON.parse(request.responseText).message
-    }
-    unhide(errorElement)
-    hide(loaderElement)
-  }
 }
 
 function hide (element) {
@@ -57,20 +53,4 @@ function hide (element) {
 
 function unhide (element) {
   element.classList.remove('hidden')
-}
-
-export function getUserByPromiseXHR () {
-  /** Ваш код */
-}
-
-export function getUserByFetch () {
-  /** Ваш код */
-}
-
-export function getUserByAxios () {
-  /** Ваш код */
-}
-
-export function showUserAvatar () {
-  /** Ваш код */
 }

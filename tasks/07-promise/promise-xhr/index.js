@@ -1,27 +1,22 @@
-/* eslint-disable */
+/* global XMLHttpRequest */
 
 class PromisedXHR {
-  send(method, url) {
+  send (method, url) {
     return new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open(method, url, true);
+      const xhr = new XMLHttpRequest()
+      xhr.open(method, url, true)
 
       xhr.onload = function () {
-        if (this.status === 200) {
-          resolve(this.response);
-        } else {
-          const error = new Error(this.statusText);
-          reject(error);
-        }
-      };
+        resolve(this)
+      }
 
       xhr.onerror = function () {
-        reject(new Error('Network Error'));
-      };
+        reject(new Error('Network Error'))
+      }
 
-      xhr.send();
-    });
+      xhr.send()
+    })
   }
 }
 
-export default PromisedXHR;
+export default PromisedXHR
