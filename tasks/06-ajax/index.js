@@ -23,11 +23,12 @@ function onSubmitUserSearch (event) {
 
 function onSuccessfulGetUserAvatarURL (url) {
   photoElement.setAttribute('src', url)
-  const whenLoad = photoElement.addEventListener('load', (event) => {
+  const handleLoad = (event) => {
     unhide(dataElement)
     hide(loaderElement)
-    photoElement.removeEventListener('load', whenLoad)
-  })
+    photoElement.removeEventListener('load', handleLoad)
+  }
+  photoElement.addEventListener('load', handleLoad)
 }
 
 function getHandlerErrorGetUserAvatarURL (nick) {
