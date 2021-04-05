@@ -1,31 +1,64 @@
-.post {
-    margin: 2vh 5vw 2vh 5vw;
-    display: flex;
+@import url("https://fonts.googleapis.com/css2?family=Jost&family=Open+Sans:wght@300&display=swap");
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #edeef0;
+  font-family: 'Open Sans', sans-serif;
 }
-
-.post > .heading {
-
+body main {
+  max-width: 500px;
+  display: flex;
+  flex-flow: column;
+  gap: 2em;
 }
-
-.post > .author {
-
+body main article.post {
+  background-color: #fff;
+  display: flex;
+  flex-flow: column;
+  border-radius: 5px;
+  padding: 1em 1.5em;
+  min-height: 350px;
 }
-
-.post > .create-date {
-
+body main article.post header {
+  max-height: 50px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding-bottom: 1em;
+  box-shadow: 0 -1px #90949c inset;
 }
-
-.post > .content {
-
+body main article.post header h3 {
+  display: block;
+  margin: 0;
+  padding: 0.5em 0;
 }
-
-.post > .like > .button {
-    appearance: none;
-    border: 0.2em solid #4c00ff;
-    height: 2em;
-    width: 2em;
+body main article.post header .meta {
+  display: flex;
+  justify-content: space-between;
 }
-
-.post > .like > .amount {
-    
+body main article.post .content {
+  font-family: 'Jost', sans-serif;
+  text-align: justify;
+  padding: 0.5em 1em;
+  flex-grow: 2;
+}
+body main article.post footer {
+  box-shadow: 0 1px #90949c inset;
+  padding-top: 0.5em;
+  max-height: 50px;
+}
+body main article.post footer .like {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+body main article.post footer .like .fa-heart {
+  width: 24px;
+  height: 24px;
+}
+body main article.post footer .like .amount {
+  font-weight: bold;
+}
+.liked {
+  color: #f00;
 }

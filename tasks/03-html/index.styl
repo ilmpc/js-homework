@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost&family=Open+Sans:wght@300&display=swap');
+
+
+body
+  display: flex
+  justify-content: center
+  background-color: #EDEEF0
+  font-family: 'Open Sans', sans-serif
+  main
+    max-width: 500px
+    display: flex
+    flex-flow: column
+    gap: 2em
+    article.post
+      background-color: #FFF
+      display: flex
+      flex-flow: column
+      border-radius: 5px
+      padding: 1em 1.5em
+      min-height: 350px
+      header
+        max-height: 50px
+        display: flex
+        flex-flow: column
+        justify-content: center
+        padding-bottom: 1em
+        box-shadow: 0 -1px #90949C inset
+        h3
+          display: block
+          margin: 0
+          padding: 0.5em 0
+        .meta
+          display: flex
+          justify-content: space-between
+      .content
+        font-family: 'Jost', sans-serif
+        text-align: justify
+        padding: 0.5em 1em
+        flex-grow: 2
+      footer
+        box-shadow: 0 1px #90949C inset
+        padding-top: 0.5em
+        max-height: 50px
+        .like
+          display: flex
+          align-items: center
+          gap: 0.5em
+          .fa-heart
+            width: 24px
+            height: 24px
+          .amount
+            font-weight: bold
+
+.liked
+  color: red
