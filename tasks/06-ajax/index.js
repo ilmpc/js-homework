@@ -1,16 +1,52 @@
-/**
- * Задача #1
- *
- * Сверстать форму с полем для ввода и кнопкой submit. В поле ввода необходимо ввести любой никнейм,
- * после подтверждения формы отправить запрос на api.github (https://api.github.com/users/{nickname})
- * на получение юзера, если юзер с таким никнеймом существует, показать его аватар,
- * иначе вывести ошибку, что такого пользователя не существует.
- * Во время выполнения запроса показывать лоадер.
- */
-export function getUser() {
-  /** Ваш код */
+import getAvatartURL from './githubFaces.js'
+
+const loaderElement = document.querySelector('main > .loader')
+const dataElement = document.querySelector('main > .data')
+const photoElement = dataElement.querySelector('.data > img[alt=photo]')
+const errorElement = document.querySelector('main > .error')
+const searchForm = document.getElementById('search-form')
+
+searchForm.addEventListener('submit', onSubmitUserSearch)
+
+function onSubmitUserSearch (event) {
+  event.preventDefault()
+  ;[dataElement, errorElement].forEach(hide)
+  unhide(loaderElement)
+
+  const nick = event.target.elements['q'].value
+  if (nick) {
+    getAvatartURL(onSuccessfulGetUserAvatarURL, getHandlerErrorGetUserAvatarURL(nick), nick)
+  } else {
+    hide(loaderElement)
+  }
 }
 
-export function showUserAvatar() {
-  /** Ваш код */
+function onSuccessfulGetUserAvatarURL (url) {
+  photoElement.setAttribute('src', url)
+  const handleLoad = (event) => {
+    unhide(dataElement)
+    hide(loaderElement)
+    photoElement.removeEventListener('load', handleLoad)
+  }
+  photoElement.addEventListener('load', handleLoad)
+}
+
+function getHandlerErrorGetUserAvatarURL (nick) {
+  return (request) => {
+    if (request.status === 404) {
+      errorElement.innerHTML = `User <strong>${nick}</strong> not found`
+    } else {
+      errorElement.innerText = JSON.parse(request.responseText).message
+    }
+    unhide(errorElement)
+    hide(loaderElement)
+  }
+}
+
+function hide (element) {
+  element.classList.add('hidden')
+}
+
+function unhide (element) {
+  element.classList.remove('hidden')
 }
