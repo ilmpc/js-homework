@@ -42,6 +42,12 @@ body main article.post .content {
   padding: 0.5em 1em;
   flex-grow: 2;
 }
+body main article.post .hide-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 300px;
+}
 body main article.post footer {
   box-shadow: 0 1px #90949c inset;
   padding-top: 0.5em;
@@ -59,6 +65,6 @@ body main article.post footer .like .fa-heart {
 body main article.post footer .like .amount {
   font-weight: bold;
 }
-.liked {
+body main article.post footer .like .liked {
   color: #f00;
 }

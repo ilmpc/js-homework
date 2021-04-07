@@ -1,3 +1,7 @@
+import ShowMore from './showMore.js'
+
+document.addEventListener('DOMContentLoaded', () => new ShowMore('.content'))
+
 const likeBlocks = document.querySelectorAll('footer .like')
 
 likeBlocks.forEach((block) => {

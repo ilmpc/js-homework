@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "jest",
-    "compile": "cd tasks/03-html && stylus -u nib -w index.styl -o index.css"
+    "compile": "cd tasks/03-html && stylus -u nib -w index.styl -o index.css",
+    "format": "yarn run standard --fix"
   },
   "repository": {
     "type": "git",
