@@ -17,7 +17,6 @@ body main article.post {
   flex-flow: column;
   border-radius: 5px;
   padding: 1em 1.5em;
-  min-height: 350px;
 }
 body main article.post header {
   max-height: 50px;
@@ -38,15 +37,9 @@ body main article.post header .meta {
 }
 body main article.post .content {
   font-family: 'Jost', sans-serif;
-  text-align: justify;
+  text-align: left;
   padding: 0.5em 1em;
   flex-grow: 2;
-}
-body main article.post .hide-overflow {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 300px;
 }
 body main article.post footer {
   box-shadow: 0 1px #90949c inset;

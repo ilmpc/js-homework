@@ -1,6 +1,7 @@
-import ShowMore from './showMore.js'
+// import ShowMore module
+const ShowMore = window.ShowMore
 
-document.addEventListener('DOMContentLoaded', () => new ShowMore('.content'))
+document.addEventListener('DOMContentLoaded', () => new ShowMore('.content', {}))
 
 const likeBlocks = document.querySelectorAll('footer .like')
 
