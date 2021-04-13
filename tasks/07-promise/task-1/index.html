@@ -25,13 +25,14 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="../promise-xhr/index.js" type="module"></script>
-    <script type="module">
+    <script src="./index.js" type="module"></script>
+<!--     <script type="module">
       import PromisedXHR from '../promise-xhr/index.js'
       (new PromisedXHR()).send('GET', 'https://api.github.com/users/ilmdsadasdasdaspc')
         .then((resp) => console.log(resp.body))  
         .catch((e) => console.error(e.message))
 
       fetch('https://api.github.com/users/ilmpc').then((e) => e.text()).then(JSON.parse).then(console.log)
-    </script>
+    </script> -->
   </body>
 </html>

@@ -20,14 +20,14 @@ function onSubmitUserSearch (event) {
   event.preventDefault()
 
   const nick = event.target.elements.q.value
-  const downloader = Downloaders[event.target.elements.type.value]
+  const downloader = Downloaders[event.submitter.value]
 
-  if (nick) { return }
+  if (!nick) { return }
 
   ;[dataElement, errorElement].forEach(hide)
   unhide(loaderElement)
 
-  getGithubAvatartURL(downloader, nick)
+  getGithubAvatarURL(downloader, nick)
     .then((url) => putUrlInImgNode(url, photoElement))
     .then(() => unhide(dataElement))
     .catch((request) => {
