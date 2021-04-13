@@ -1,6 +1,5 @@
 export async function getAvatartURL (downloader, nick) {
-  const resp = await downloader(`https://api.github.com/users/${nick}`)
-  const user = JSON.parse(resp)
+  const user = await downloader(`https://api.github.com/users/${nick}`)
   return user.avatar_url
 }
 

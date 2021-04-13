@@ -1,5 +1,5 @@
-import Downloaders from './downloaders.js'
-import { getErrorTextFromRequest as getErrorTextFromGithubRequest, getAvatartURL as getGithubAvatarURL } from './githubFaces.js'
+import downloaders from './downloaders.js'
+import { getErrorTextFromRequest as getErrorTextFromGithubRequest, getAvatartURL as getGithubAvatarURL } from './githubServices.js'
 
 const loaderElement = document.querySelector('main > .loader')
 const dataElement = document.querySelector('main > .data')
@@ -20,7 +20,7 @@ function onSubmitUserSearch (event) {
   event.preventDefault()
 
   const nick = event.target.elements.q.value
-  const downloader = Downloaders[event.submitter.value]
+  const downloader = downloaders[event.submitter.value]
 
   if (!nick) { return }
 

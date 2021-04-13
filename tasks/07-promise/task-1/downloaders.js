@@ -1,4 +1,4 @@
-/* global axios */
+/* global axios, fetch */
 import PromisedXHR from '../promise-xhr/index.js'
 
 async function xhrDownloader (url) {
@@ -7,7 +7,7 @@ async function xhrDownloader (url) {
     xhr.send('GET', url)
       .then((request) => {
         if (request.status === 200) {
-          resolve(request.responseText)
+          resolve(JSON.parse(request.responseText))
         } else {
           reject(request)
         }
@@ -22,7 +22,7 @@ async function fetchDownloader (url) {
     request
       .then((response) => {
         if (response.status === 200) {
-          resolve(response.text())
+          resolve(response.json())
         } else {
           reject(response)
         }
@@ -37,14 +37,14 @@ async function axiosDownloader (url) {
   return new Promise((resolve, reject) => {
     request
       .then((response) => {
-        resolve(JSON.stringify(response.data)) 
+        resolve(response.data)
       })
       .catch(({ response }) => {
         response.text = () => response.data
         reject(response)
       })
   }
-  ) 
+  )
 }
 
 export default {
