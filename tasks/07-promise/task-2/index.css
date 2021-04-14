@@ -28,6 +28,20 @@ body {
   font-family: 'Jost', sans-serif;
   background-color: #EEEEEE;
 }
+#search-form {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+}
+#search-form > input[type=search] {
+  min-width: 200px;
+  width: 20vw;
+}
+
+#search-form > div{
+  display: flex;
+  justify-content: space-evenly;
+}
 
 /* Loader */
 .loader {

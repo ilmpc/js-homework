@@ -1,5 +1,4 @@
 /* global axios, fetch */
-
 import PromisedXHR from '../promise-xhr/index.js'
 
 async function xhrDownloader (url) {

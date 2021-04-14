@@ -5,23 +5,26 @@
     <meta name="viewport" content="width=device-width">
     <title>Promise Task 2</title>
     <link href="index.css" rel="stylesheet" type="text/css" />
+    <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/pretty-print-json@1.0/dist/pretty-print-json.css>
   </head>
   <body>
     <header>
-      <h1>Search Github users</h1>
+      <h1>Fetch JSON</h1>
       <form id="search-form">
-        <input type="search" name="q" autocomplete="off">
-        <input type="submit">
+        <input type="search" name="q" autocomplete="off" placeholder="post ID">
+        <div>
+          <input type="submit" name="type" value="xhr">
+          <input type="submit" name="type" value="fetch">
+          <input type="submit" name="type" value="axios">
+      </div>
       </form>
     </header>
     <main>
       <div class="loader hidden"><div></div><div></div><div></div><div></div></div>
-      <div class="data hidden"><img alt="photo"/></div>
+      <div class="data hidden"><pre></pre></div>
       <div class="error hidden"></div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script type="module" src="index.js"></script>
-    <script type="module" src="githubFaces.js"></script>
-    <script type="module" src="network.js"></script>
   </body>
 </html>

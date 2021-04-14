@@ -1,29 +1,52 @@
-/**
- * Задача #2
- *
- * Необходимо отправить GET запрос на https://jsonplaceholder.typicode.com/posts/{postId}
- * (1 < postId ≤ 100), затем посмотреть в ответе поле `userId`,
- * отправить GET запрос на https://jsonplaceholder.typicode.com/users/{userId} и вывести данные в консоль.
- * Для отправки запросов сделать текстовое поле для ввода `postId` и три кнопки.
- *
- * Каждая кнопка должна отправлять запрос одним из способов:
- * 1) через обертку Promise над XHR (https://codesandbox.io/s/l47zmkw84z);
- * 2) через fetch (https://developer.mozilla.org/ru/docs/Web/API/Fetch_API);
- * 3) через axios (https://github.com/axios/axios).
- *
- * !!!! axios и fetch уже есть в области видимости (необходимо просто использовать) !!!!
- */
+import { prettyPrintJson } from 'https://cdn.jsdelivr.net/npm/pretty-print-json/+esm'
+import downloaders from './downloaders.js'
+import { fetchAuthorOfPost } from './services.js'
 
-import PromiseXHR from '../promise-xhr'
+const loaderElement = document.querySelector('main > .loader')
+const dataElement = document.querySelector('main > .data')
+const codeElement = dataElement.querySelector('pre')
+const errorElement = document.querySelector('main > .error')
+const searchForm = document.getElementById('search-form')
 
-export function getResponseByPromiseXHR () {
-  /** Ваш код */
+searchForm.addEventListener('submit', onSubmitFetch)
+
+// clear div
+// nick, type
+// animation
+// request(type, nick)
+// then(show user)
+// catch(error)
+// then(stop animation)
+function onSubmitFetch (event) {
+  event.preventDefault()
+
+  const postId = event.target.elements.q.value
+  const downloader = downloaders[event.submitter.value]
+
+  if (!postId) { return }
+
+  ;[dataElement, errorElement].forEach(hide)
+  unhide(loaderElement)
+
+  fetchAuthorOfPost(downloader, postId)
+    .then((user) => putJsonInElement(codeElement, user))
+    .then(() => unhide(dataElement))
+    .catch((request) => {
+      console.error(request)
+      errorElement.innerHTML = 'Упаль :c'
+      unhide(errorElement)
+    })
+    .then(() => hide(loaderElement))
 }
 
-export function getResponseByFetch () {
-  /** Ваш код */
+function hide (element) {
+  element.classList.add('hidden')
 }
 
-export function getResponseByAxios () {
-  /** Ваш код */
+function unhide (element) {
+  element.classList.remove('hidden')
+}
+
+function putJsonInElement (element, data) {
+  element.innerHTML = prettyPrintJson.toHtml(data)
 }
